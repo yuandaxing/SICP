@@ -1,0 +1,42 @@
+
+#lang slideshow
+(define c1 (circle 10))
+(define r1 (rectangle 10 20))
+
+(vl-append 20 c1 r1)
+(lt-superimpose c1 r1)
+
+(define MinSize 5)
+(define (exp2 n)
+  (if (= n 0) 1
+      (* 2 (exp2 (- n 1)))))
+(exp2 3)
+
+(define (picture  n )
+  (let ((wid (* (exp2 n) MinSize))
+        (color (if (odd? n) "black" "red")))
+    (if (= n 0)
+        (colorize (rectangle wid wid) color)
+        (hc-append (vc-append (picture (- n 1)) (picture (- n 1))) (colorize (rectangle (/ wid 2) wid) color)))))
+(picture 5)
+  
+(define (picture-1 n adder)
+    (let ((wid (* (exp2 n) MinSize))
+          (color (cond ((= (remainder (+ n adder) 3) 0) "red")
+                       ((= (remainder (+ n adder) 3) 1) "black")
+                       (else "blue"))))
+          (if (= n 0)
+              (colorize (filled-rectangle wid wid) color)
+              (hc-append (vc-append 
+                          (picture-1 (- n 1) (- adder 1)) 
+                          (picture-1 (- n 1) adder)) 
+                         (colorize (filled-rectangle (/ wid 2) wid) color)))))
+
+(picture-1 5  10)
+
+(define (picture-2  n)
+  (let ((wid (* (exp2 n) MinSize)))
+    (if (= n 0)
+        (rectangle wid wid)
+        (hc-append (vc-append (picture-2 (- n 1)) (picture-2 (- n 1))) (rectangle (/ wid 2) wid)))))
+(picture-2 5)
