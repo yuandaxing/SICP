@@ -349,15 +349,23 @@
 
 (define (cube10 x)
   ((smooth-n cube 10) x))
-;(cube10 0)
+;(cube10 1)
 
-(define (square10 x)
-  ((smooth-n square 10) x))
-;(square10 0)
-;((smooth(smooth square)) 0)
+;1.45
 
-;(define (expn n)
- ; (lambda (x) (if (= 0 n) 1
-                  (* x ((expn (- n 1)) x)))))
-;(define (dempen-root x n)
- ; (fixed-point
+(define (average x y) (/ (+ x y) 2))
+
+(define (average-n n)
+  (repeated average n))
+
+(define (my-expt x n)
+  (if (= n 0)
+      1
+      (* x (expt x (- n 1)))))
+
+(define (dump-n average-damp-n nroot x) 
+(fixed-point 
+ ((repeated average-damp average-damp-n) 
+  (lambda (y) (/ x (my-expt y (- nroot 1)))))
+ 1.0))
+(dump-n 5 5 2)
