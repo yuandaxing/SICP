@@ -99,15 +99,11 @@
   (lambda (x)
     (/ (+ (f x) (f (+ x dx)) (f (- x dx))) 3)))
 
+
 ((compose (compose-n f1 2) f2) 10)
 ((compose f2 (compose-n f1 2)) 10)
-
-;function is also closure, and easy to combiner them
-;hard to understand
+       
 (define (smooth-n f n)
   ((compose-n smooth n) f))
+
 ((smooth-n f1 2) 0)
-
-;acutuall the compose if only for unary variable
-
-((compose (compose f1 f2) f1) 20)
