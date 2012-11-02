@@ -1,0 +1,34 @@
+(define (And-Query f1 f2)
+  (lambda (l)
+    (let ((a1 (f1 l))
+          (a2 (f2 l)))
+      (intersect a1 a2))))
+(define (Not-Query f)
+  (lambda (l)
+    (let ((a (f l)))
+      (sublist l a))))
+(define (Or-Query f1 f2)
+  (lambda (l)
+    (let ((a1 (f1 l))
+          (a2 (f2 l)))
+      (adjoin a1 a2))))
+
+(define (QueryNot x)
+  (lambda (l)
+    (notExist l x)))
+(define (Bigger x)
+  (lambda (l)
+    (bigthan l x)))
+(define (less x)
+  (lambda (l)
+    (lessthan l x)))
+
+(define f1 (QueryNot 5))
+(define f2 (Bigger 0))
+(define f2 (less 1000))
+(define myQuery (Or-Query (And-Query f1 f2) f3))
+
+
+
+      
+    

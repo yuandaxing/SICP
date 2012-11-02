@@ -1,0 +1,44 @@
+(define (cons-stream  a b)
+  (cons a (delay b)))
+(define (stream-car stream)
+  (car stream))
+(define (stream-cdr stream)
+  (force (cdr stream)))
+
+(define (numerate-interval a b)
+  (if (> a b)
+      null
+      (cons-stream a (numerate-interval (+ a 1) b))))
+
+(define s1 (numerate-interval 1 100000))
+
+(define (stream-ref s n)
+  (if (= n 0)
+      (stream-car s)
+      (stream-ref (stream-cdr s) (- n 1))))
+(define (stream-map proc s)
+  (if (stream-null? s)
+      the-empty-stream
+      (cons-stream (proc (stream-car s))
+                   (stream-map proc (stream-cdr s)))))
+(define (stream-for-each proc s)
+  (if (stream-null? s)
+      'done
+      (begin (proc (stream-car s))
+             (stream-for-each proc (stream-cdr s)))))
+(define (stream-null? s)
+  (null? s))
+
+;test
+(stream-ref s1 20)
+(stream-map (lambda (x) (* x x)) s1)
+
+;3.50
+(define (stream-map proc . argstreams)
+  (if (null? car argstreams)
+      null
+      (cons-stream
+       (apply proc (map stream-car argstream))
+       (apply stream-map 
+              proc
+              (map stream-cdr argstream)))))
