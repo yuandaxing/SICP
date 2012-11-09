@@ -1,0 +1,5 @@
+
+(defun cons-stream (left right)
+  (cons left
+	(delay right)))
+(defun (car stream)

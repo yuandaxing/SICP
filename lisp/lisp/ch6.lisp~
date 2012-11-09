@@ -1,0 +1,21 @@
+(defun abc ()
+  (let ((a 1) (b 2) (c 3))
+    (list a b c)))
+
+(defun f2 ()
+  (dotimes (x 10)
+    (format t "~a~%" x)))
+
+(defun f3 ()
+  (let* ((x 10)
+	 (y (+ x 1)))
+    (list x y)))
+
+(defvar *count* 0
+  "counts the number of objects")
+(defparameter *gap* 20
+  "the gap of the valley")
+
+(defvar *x* 10)
+(defun foo ()
+  (format t "X:~a ~%" *x*))

@@ -1,0 +1,4 @@
+(define f ()
+  (if nil
+      (format t "false")
+      (format t "true")))
