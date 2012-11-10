@@ -1,4 +1,4 @@
-(in-package :com.gigamonkeys.spam)
+;(in-package :com.gigamonkeys.spam)
 
 (defvar *feature-database* (make-hash-table :test #'equal))
 (defvar *total-spams* 0)
