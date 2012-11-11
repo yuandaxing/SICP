@@ -129,4 +129,24 @@
 (defmacro mul-stream (&rest ss)
   `(stream-map #'* ,@ss))
 
-(defvar s*s (mul-stream s22 s22))
+(defvar s*s (mul-stream s22 s22 s22))
+
+(defun stream-map-element (proc s)
+  (if (stream-null? s)
+      the-empty-stream
+      (cons-stream (funcall proc (stream-car s))
+		   (stream-map-element proc (stream-cdr s)))))
+(defun scale-stream (factor s)
+  (stream-map-element #'(lambda (x) (* factor x)) s))
+
+(defun integral (integrand init-value dt)
+  (defvar int
+    (cons-stream init-value
+		 (add-stream
+		  (scale-stream dt integrand)
+		  int)))
+  int)
+
+(defvar integrand-1 (integer-from 0))
+
+(defvar s-int (integral integrand-1 0 0.22))
