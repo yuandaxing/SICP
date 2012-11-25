@@ -140,13 +140,11 @@
   (stream-map-element #'(lambda (x) (* factor x)) s))
 
 (defun integral (integrand init-value dt)
-  (defvar int
-    (cons-stream init-value
-		 (add-stream
-		  (scale-stream dt integrand)
-		  int)))
-  int)
-
+  (let ((int nil))
+    (setf int (cons-stream init-value
+			   (add-stream int
+				       (scale-stream dt integrand))))
+    int))
 (defvar integrand-1 (integer-from 0))
 
-(defvar s-int (integral integrand-1 0 0.22))
+(defvar s-int (integral integrand-1 0 0.0000001))

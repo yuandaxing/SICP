@@ -57,12 +57,15 @@
                  (splite (second-splite-first-half  combine splite (- n 1) f1 f2)
                          (second-splite-first-half  combine splite (- n 1) f1 f2))))))
 
-(define (left-splite n)
-  (first-splite-second-half hc-append vc-append n 1/2 1))
-;(left-splite 5)
+
 (define (top-splite n)
   (first-splite-second-half vc-append hc-append n 1 1/2))
+(define (left-splite n)
+  (rotate (top-splite n) (/ pi 4)))
+;(left-splite 5)
+
 ;(top-splite 5)
+
 (define (right-splite n)
   (second-splite-first-half hc-append vc-append n 1/2 1))
 ;(right-splite 5)
@@ -71,10 +74,13 @@
 ;(down-splite 5)
 (define (top-splite-1 n)
    (first-splite-second-half vc-append hc-append n 1 1))
+;(top-splite-1 4)
+(define (left-splite-1 n)
+  ;(first-splite-second-half hc-append vc-append n 1 1))
+  (rotate (top-splite-1 n) (/ pi 2)))
 (define (right-splite-1 n)
    (second-splite-first-half hc-append vc-append n 1 1))
-(define (left-splite-1 n)
-  (first-splite-second-half hc-append vc-append n 1 1))
+
 (define (down-splite-1 n)
   (second-splite-first-half vc-append hc-append n 1 1))
 ;(right-splite-1 5)
@@ -108,7 +114,11 @@
 (define (c3 n) (rotate (c2 n) (/ pi 2)))
 (define (c4 n) (rotate (c3 n) (/ pi 2)))
 (define (c5 n) (rotate (c4 n) (/ pi 2)))
-;(c2 4)
+(define (whole n)
+  (hc-append 
+   (vc-append (c2 n) (c3 n))
+   (vc-append (c5 n) (c4 n))))
+(whole 4)
 ;(c3 4)
 ;(c4 4)
 ;(c5 4)

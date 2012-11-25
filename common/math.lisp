@@ -1,0 +1,12 @@
+(defun prime? (n)
+  (defun iter (i)
+    (cond ((> (* i i) n) t)
+	  ((= (mod n i) 0) nil)
+	  (t (iter (+ i 1)))))
+  (iter 2))
+(defun iter-fib (n)
+    (defun iter-1 (c ne i)
+      (if (= i 0)
+	  c
+	  (iter-1 ne (+ c ne) (- i 1))))
+  (iter-1 0 1 n))

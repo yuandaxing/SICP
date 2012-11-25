@@ -1,0 +1,6 @@
+(defun prime? (n)
+  (defun iter (i)
+    (cond ((> (* i i) n) t)
+	  ((= (mod n i) 0) nil)
+	  (t (iter (+ i 1)))))
+  (iter 2))

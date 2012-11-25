@@ -1,0 +1,10 @@
+(defstruct node
+  contents yes no)
+(defvar *nodes* (make-hash-table))
+(defun defnode (name conts &optional yes no)
+  (setf (gethash name *nodes*)
+	(make-node :contents conts
+		   :yes
+		   yes
+		   :no
+		   no)))

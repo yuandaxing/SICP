@@ -1,0 +1,9 @@
+(defclass key-value ()
+  ((key
+    :initarg :key
+    :accessor key
+    :initform (error "Must supply :word"))
+   (value
+    :initarg :value
+    :accessor value
+    :initform nil)))

@@ -1,4 +1,4 @@
-(in-package #:com.gigamonkeys.pathnames)
+;(in-package #:com.gigamonkeys.pathnames)
 
 (defun list-directory (dirname)
   "Return a list of the contents of the directory named by dirname.

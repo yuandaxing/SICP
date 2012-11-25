@@ -190,7 +190,7 @@
           fail))
         (else
          (error
-          "Unknown procedure type -- EXECUTE-APPLICATION"
+          "Unknown procedure type -- EXECUTE-APPLICATIONs"
           proc))))
 
 ;;;amb expressions

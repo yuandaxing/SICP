@@ -1,7 +1,6 @@
-;(in-package :com.gigamonkeys.spam)
-(push "/home/ydx/cl-ppcre-2.0.3/" asdf:*central-registry*)
-(asdf:load-system :cl-ppcre)
-
+(in-package :com.gigamonkeys.spam)
+;(push "/home/ydx/cl-ppcre-2.0.3/" asdf:*central-registry*)
+;(asdf:load-system :cl-ppcre)
 
 (defvar *feature-database* (make-hash-table :test #'equal))
 (defvar *total-spams* 0)
@@ -167,8 +166,8 @@ Based on Gary Robinson's Python implementation."
 
 (defun test-from-corpus (corpus &key (start 0) end)
   (loop for idx from start below (or end (length corpus)) collect
-        (destructuring-bind (file type) (aref corpus idx)
-          (multiple-value-bind (classification score)
+        (destructuring-bind (file type) (aref corpus idx) ;for split list or 
+          (multiple-value-bind (classification score)  ;multi value return function
               (classify (start-of-file file *max-chars*))
             (list 
              :file file

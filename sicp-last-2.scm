@@ -92,18 +92,18 @@
 
 (define f1
   (lambda (x) (* x x)))
+(define f4 (compose-n f1 4))
+(f4 2)
+(print "here")
 (define f2
   (lambda (x) (* 2 x)))
 
 (define (smooth f)
   (lambda (x)
-    (/ (+ (f x) (f (+ x dx)) (f (- x dx))) 3)))
-
-
-((compose (compose-n f1 2) f2) 10)
-((compose f2 (compose-n f1 2)) 10)
-       
+    (/ (+ (f x) (f (+ x dx)) (f (- x dx))) 3)))     
 (define (smooth-n f n)
   ((compose-n smooth n) f))
-
+((compose (compose-n f1 2) f2) 10)
+((compose f2 (compose-n f1 2)) 10)
 ((smooth-n f1 2) 0)
+
