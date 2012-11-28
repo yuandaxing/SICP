@@ -60,7 +60,7 @@
   (lrec #'(lambda (x f) (or (funcall pred x) (funcall f)))))
 
 
-(defun ttrav (rec &optional (base #'identity))
+n(defun ttrav (rec &optional (base #'identity))
   (labels ((self (tree)
 	     (if (atom tree)
 		 (if (functionp base)
